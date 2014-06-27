@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class adapter extends ArrayAdapter<OneSerie> {
-    public adapter(Context context, ArrayList<OneSerie> series) {
+public class Adapter extends ArrayAdapter<OneSerie> {
+    public Adapter(Context context, ArrayList<OneSerie> series) {
        super(context, R.layout.custom_row, series);
     }
 

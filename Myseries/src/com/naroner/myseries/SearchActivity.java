@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.naroner.classe.ContainerData;
 import com.naroner.classe.OneSerie;
-import com.naroner.classe.adapter;
+import com.naroner.classe.Adapter;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -20,7 +20,15 @@ public class SearchActivity  extends Activity {
 	EditText edittext;
 	ListView listviewResult;
 	ArrayList<OneSerie> Series;
-	adapter _adapter;
+	Adapter _adapter;
+	
+	public ArrayList<OneSerie> getSeries() {
+		return Series;
+	}
+
+	public void setSeries(ArrayList<OneSerie> series) {
+		Series = series;
+	}
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +38,6 @@ public class SearchActivity  extends Activity {
         edittext = (EditText)findViewById(R.id.searchEditView);
         listviewResult = (ListView)findViewById(R.id.listviewResult);
         Series = new ArrayList<OneSerie>();
-        _adapter = new adapter(getApplicationContext(), Series);
-        listviewResult.setAdapter(_adapter);
         
         buttonSearch.setOnClickListener(new Button.OnClickListener(){
 			@Override
@@ -49,14 +55,15 @@ public class SearchActivity  extends Activity {
 		
 		@Override
 		protected String doInBackground(String... params) {
-			Series = ContainerData.getFeeds(params[0]);
+			setSeries(ContainerData.getFeeds(params[0]));
 			String statut = "finish";
 			return statut;
 		}
 		
 		@Override
 		   protected void onPostExecute(String result) {
-		      _adapter.notifyDataSetChanged();
+			  _adapter = new Adapter(getApplicationContext(), Series);
+			  listviewResult.setAdapter(_adapter);
 		      for(int i =0; i < Series.size(); i++){
 		    	  Log.e("returnrequest", Series.get(i).toString());
 		      }
