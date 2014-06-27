@@ -7,10 +7,13 @@ import com.naroner.classe.OneSerie;
 import com.naroner.classe.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -49,6 +52,25 @@ public class SearchActivity  extends Activity {
 		        networkrequest.execute(url);
 			}
 		});
+        
+        listviewResult.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+            	Intent intent = new Intent(SearchActivity.this, OneSerieActivity.class);
+            	Bundle mBundle = new Bundle();
+            	String id_serie_selectesd = Series.get(position).get_seriesid();
+            	String name_serie_selectesd = Series.get(position).get_SeriesName();
+            	String overview_serie_selectesd = Series.get(position).get_Overview();
+            	String banner_serie_selectesd = Series.get(position).get_banner();
+            	Log.e("msg", id_serie_selectesd);
+            	mBundle.putString("IdSerie", id_serie_selectesd);
+            	mBundle.putString("NameSerie", name_serie_selectesd);
+            	mBundle.putString("OverviewSerie", overview_serie_selectesd);
+            	mBundle.putString("BannerSerie", banner_serie_selectesd);
+            	intent.putExtras(mBundle);
+            	startActivity(intent);
+            }
+        });
     }
 	
 	public class Networking extends AsyncTask<String,String,String>{

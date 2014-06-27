@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.naroner.myseries.SearchActivity" />
+        <activity android:name="com.naroner.myseries.OneSerieActivity" />
     </application>
 
 </manifest>

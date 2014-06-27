@@ -1102,6 +1102,7 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
+        public static final int image_serie=0x7f050041;
         public static final int listMode=0x7f050001;
         public static final int listViewSerie=0x7f05003f;
         public static final int list_item=0x7f050029;
@@ -1131,10 +1132,12 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
+        public static final int textview_overflow=0x7f050043;
+        public static final int textview_titre=0x7f050042;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
-        public static final int tvHome=0x7f050042;
-        public static final int tvName=0x7f050041;
+        public static final int tvHome=0x7f050045;
+        public static final int tvName=0x7f050044;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
@@ -1191,8 +1194,9 @@ containing a value of this type.
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_autocomplete=0x7f030018;
         public static final int activity_main=0x7f030019;
-        public static final int custom_row=0x7f03001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
+        public static final int activity_one_serie=0x7f03001a;
+        public static final int custom_row=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
