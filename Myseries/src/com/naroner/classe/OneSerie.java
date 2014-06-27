@@ -15,7 +15,6 @@ public class OneSerie {
 	public OneSerie(String _seriesid, String _language, String _SeriesName,
 			String _banner, String _Overview, String _FirstAired,
 			String _Network, String _IMDB_ID, String _zap2it_id, String _id) {
-		super();
 		this._seriesid = _seriesid;
 		this._language = _language;
 		this._SeriesName = _SeriesName;
@@ -26,6 +25,10 @@ public class OneSerie {
 		this._IMDB_ID = _IMDB_ID;
 		this._zap2it_id = _zap2it_id;
 		this._id = _id;
+	}
+	
+	public OneSerie() {
+		
 	}
 
 	public String get_seriesid() {
@@ -106,6 +109,10 @@ public class OneSerie {
 
 	public void set_id(String _id) {
 		this._id = _id;
+	}
+	
+	public String toString(){
+		return this._SeriesName;
 	}
 	
 	

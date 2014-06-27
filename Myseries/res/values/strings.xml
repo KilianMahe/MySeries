@@ -3,5 +3,7 @@
 
     <string name="app_name">Myseries</string>
     <string name="hello_world">Hello world!</string>
+    <string name="text_add_serie">Add new Serie</string>
+    <string name="text_search">Search</string>
 
 </resources>
