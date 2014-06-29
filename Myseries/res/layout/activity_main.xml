@@ -23,6 +23,7 @@
          	android:layout_marginBottom="10dp"
          	android:layout_marginLeft="10dp"
          	android:layout_marginRight="10dp"
-         	android:text="@string/text_add_serie" />"
+         	android:text="@string/text_add_serie"
+         	android:background="@drawable/button_add" />"
 
 </RelativeLayout>

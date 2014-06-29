@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:layout_width="match_parent"
+	   		android:layout_height="match_parent">
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+	    
+		<ImageView android:id="@+id/image_serie"
+		    	   android:layout_width="match_parent"
+		    	   android:layout_height="wrap_content"
+		    	   android:layout_alignParentTop="true"
+		    	   android:layout_alignParentLeft="true"
+		    	   android:layout_alignParentRight="true"
+		    	   android:adjustViewBounds="true"
+		    	   android:contentDescription="image serie" />
+		
+		<RelativeLayout android:layout_width="match_parent"
+	    				android:layout_height="wrap_content"
+	    				android:id="@+id/relative_text"
+	    				android:layout_below="@+id/image_serie"
+	    				android:layout_marginRight="5dp"
+	    				android:layout_marginLeft="5dp"
+	    >
+		    
+		    <TextView android:id="@+id/textview_titre"
+			    	   android:layout_width="wrap_content"
+			    	   android:layout_height="wrap_content"
+			    	   android:textSize="25sp"
+			    	   android:textStyle="bold"
+			    	   android:layout_marginTop="15dp"
+			    	   android:layout_marginBottom="10dp"
+			    	   android:layout_alignParentTop="true" 
+			    	   android:layout_centerHorizontal="true"/>
+		    
+		    
+		    <TextView android:id="@+id/textview_genre"
+		        	  android:layout_width="wrap_content"
+		    	   	  android:layout_height="wrap_content"
+		    	   	  android:layout_below="@+id/textview_titre"
+		    	   	  android:layout_marginBottom="15dp"
+		    	   	  android:layout_marginTop="15dp"/>
+		
+			<TextView android:id="@+id/textview_overflow"
+			           android:layout_width="match_parent"
+			    	   android:layout_height="wrap_content"
+			    	   android:layout_marginBottom="15dp"
+			    	   android:layout_below="@+id/textview_genre"
+			    	   android:layout_alignParentLeft="true"
+			    	   android:layout_alignParentRight="true" />
+			
+			<RatingBar android:id="@+id/ratingbar"
+			    	   android:layout_width="wrap_content"
+			    	   android:layout_height="wrap_content"
+			    	   android:numStars="10"
+			    	   android:stepSize="0.1"
+			    	   android:isIndicator="true"
+			    	   android:layout_below="@+id/textview_overflow"
+			    	   android:layout_centerHorizontal="true"
+			    	   style="@style/foodRatingBar" />
+			
+			<TextView android:id="@+id/textview_number_rating"
+			    		 android:layout_width="wrap_content"
+			    	     android:layout_height="wrap_content"
+			    	     android:layout_centerHorizontal="true"
+			    	     android:layout_below="@+id/ratingbar"
+			    	     />
+			
+			<TextView  android:id="@+id/textview_nomber_user_saisonactual"
+			   	       android:layout_width="match_parent"
+			    	   android:layout_height="wrap_content"
+			    	   android:layout_marginTop="15dp"
+			    	   android:layout_marginBottom="5dp"
+			    	   android:layout_below="@+id/textview_number_rating"
+			    	   android:layout_alignParentLeft="true"
+			    	   android:layout_alignParentRight="true" />
+			
+			<TextView  android:id="@+id/textview_nomber_user_episodeactual"
+			   	       android:layout_width="match_parent"
+			    	   android:layout_height="wrap_content"
+			    	   android:layout_marginBottom="5dp"
+			    	   android:layout_below="@+id/textview_nomber_user_saisonactual"
+			    	   android:layout_alignParentLeft="true"
+			    	   android:layout_alignParentRight="true" />
+			
+			<TextView  android:id="@+id/textview_nomber_saisonactual"
+			   	       android:layout_width="match_parent"
+			    	   android:layout_height="wrap_content"
+			    	   android:layout_marginBottom="15dp"
+			    	   android:layout_below="@+id/textview_nomber_user_episodeactual"
+			    	   android:layout_alignParentLeft="true"
+			    	   android:layout_alignParentRight="true" />
+			
+			<LinearLayout
+			    android:orientation="horizontal"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_below="@+id/textview_nomber_saisonactual"
+			    android:layout_marginBottom="5dp"
+			    android:id="@+id/linear_button">
+			    
+			    <Button android:id="@+id/button_delete"
+			        	android:layout_width="0px"
+			        	android:layout_weight="1"
+				    	android:layout_height="match_parent"
+				    	android:text="@string/text_delete"
+				    	android:padding="10dp"
+				    	android:layout_marginRight="2dp"
+				    	android:layout_marginBottom="5dp"
+	    				android:textColor="#ffffff"
+				    	android:background="@drawable/button_add"/>
+				
+				<Button android:id="@+id/button_update"
+			        	android:layout_width="0px"
+			        	android:layout_weight="1"
+				    	android:layout_height="match_parent"
+				    	android:layout_marginBottom="5dp"
+				    	android:text="@string/text_update"
+				    	android:padding="10dp"
+				    	android:layout_marginLeft="2dp"
+	    				android:textColor="#ffffff"
+				    	android:background="@drawable/button_add"/>
+			
+			</LinearLayout>
+			
+		</RelativeLayout>
+		
+		<ImageView android:id="@+id/image_fan_art"
+		    	   android:layout_width="match_parent"
+		    	   android:layout_height="wrap_content"
+		    	   android:layout_alignParentLeft="true"
+		    	   android:layout_alignParentRight="true"
+		    	   android:layout_below="@+id/relative_text"
+		    	   android:adjustViewBounds="true"
+		    	   android:contentDescription="image serie" />
+	    
+	</RelativeLayout>
+</ScrollView>

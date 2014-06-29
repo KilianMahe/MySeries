@@ -1,10 +1,12 @@
-package com.naroner.classe;
+package com.naroner.parsing;
 
 import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.naroner.classe.OneSerie;
 
 public class ParserXMLHandler extends DefaultHandler {
 

@@ -2,16 +2,18 @@ package com.naroner.myseries;
 
 import java.util.ArrayList;
 
-import com.naroner.classe.ContainerData;
+import com.naroner.adapter.Adapter;
 import com.naroner.classe.OneSerie;
-import com.naroner.classe.Adapter;
-
+import com.naroner.parsing.ContainerData;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -45,6 +47,9 @@ public class SearchActivity  extends Activity {
         buttonSearch.setOnClickListener(new Button.OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(
+					      Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(edittext.getWindowToken(), 0);
 				String searchtext = edittext.getText().toString();
 				searchtext = searchtext.replace(" ", "+");
 				String url = "http://thetvdb.com/api/GetSeries.php?seriesname="+searchtext;
@@ -74,6 +79,7 @@ public class SearchActivity  extends Activity {
     }
 	
 	public class Networking extends AsyncTask<String,String,String>{
+		ProgressDialog progDailog = new ProgressDialog(SearchActivity.this);
 		
 		@Override
 		protected String doInBackground(String... params) {
@@ -86,10 +92,18 @@ public class SearchActivity  extends Activity {
 		   protected void onPostExecute(String result) {
 			  _adapter = new Adapter(getApplicationContext(), Series);
 			  listviewResult.setAdapter(_adapter);
-		      for(int i =0; i < Series.size(); i++){
-		    	  Log.e("returnrequest", Series.get(i).toString());
-		      }
+			  progDailog.dismiss();
 		   }
+		
+		@Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progDailog.setMessage("Loading...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
+        }
 
 	}
 

@@ -5,5 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="text_add_serie">Add new Serie</string>
     <string name="text_search">Search</string>
+    <string name="text_add">Add to my series</string>
+    <string name="text_confirm">Confirm</string>
+    <string name="text_dismiss">Dismiss</string>
+    <string name="text_update">Update actual episode</string>
+    <string name="text_delete">Delete serie</string>
 
 </resources>

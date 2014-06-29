@@ -25,6 +25,7 @@
         </activity>
         <activity android:name="com.naroner.myseries.SearchActivity" />
         <activity android:name="com.naroner.myseries.OneSerieActivity" />
+        <activity android:name="com.naroner.myseries.StoreSerieActivity" />
     </application>
 
 </manifest>

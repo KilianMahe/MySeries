@@ -1,7 +1,8 @@
-package com.naroner.classe;
+package com.naroner.adapter;
 
 import java.util.ArrayList;
 
+import com.naroner.classe.OneSerie;
 import com.naroner.myseries.R;
 
 import android.content.Context;
@@ -26,10 +27,8 @@ public class Adapter extends ArrayAdapter<OneSerie> {
        }
        // Lookup view for data population
        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-       TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
        // Populate the data into the template view using the data object
        tvName.setText(user.get_SeriesName());
-       tvHome.setText(user.get_Overview());
        // Return the completed view to render on screen
        return convertView;
    }
