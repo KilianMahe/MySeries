@@ -38,7 +38,6 @@ import android.widget.TextView;
 public class OneSerieActivity extends Activity{
 	ImageView image;
 	ImageView image_fan_art;
-	TextView textViewTitre;
 	TextView textViewOverview;
 	TextView textview_nomber_saisonactual;
 	TextView textview_number_rating;
@@ -61,7 +60,6 @@ public class OneSerieActivity extends Activity{
         networkrequest.execute(url);
         image = (ImageView)findViewById(R.id.image_serie);
         image_fan_art = (ImageView)findViewById(R.id.image_fan_art);
-        textViewTitre = (TextView)findViewById(R.id.textview_titre);
         textViewOverview = (TextView)findViewById(R.id.textview_overflow);
         textview_nomber_saisonactual = (TextView)findViewById(R.id.textview_nomber_saisonactual);
         textview_number_rating = (TextView)findViewById(R.id.textview_number_rating);
@@ -78,7 +76,6 @@ public class OneSerieActivity extends Activity{
         
         new DownloadImageTask((ImageView) findViewById(R.id.image_serie))
         .execute("http://thetvdb.com/banners/"+intent.getStringExtra("BannerSerie"));
-        textViewTitre.setText(intent.getStringExtra("NameSerie"));
         textViewOverview.setText(intent.getStringExtra("OverviewSerie"));
         
     }
@@ -264,7 +261,7 @@ public class OneSerieActivity extends Activity{
 					 ratingbar.setRating(rating);
 					 setTitle(Series.get(i).get_SeriesName());
 					 textview_nomber_saisonactual.setText("Number of seasons : "+Series.get(i).get_nombre_saison());
-					 textview_number_rating.setText(Series.get(i).get_RatingCount()+" votes");
+					 textview_number_rating.setText(Series.get(i).get_RatingCount()+" votes ("+Series.get(i).get_Rating()+")");
 					 String genres = Series.get(i).get_Genre();
 					 genres = genres.substring(1, genres.length()-1); 
 					 genres = genres.replace("|", ", ");

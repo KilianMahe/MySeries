@@ -34,7 +34,6 @@ import com.naroner.parsing.ContainerData;
 public class StoreSerieActivity extends Activity{
 	ImageView image;
 	ImageView image_fan_art;
-	TextView textViewTitre;
 	TextView textViewOverview;
 	TextView textview_nomber_saisonactual;
 	TextView textview_number_rating;
@@ -60,7 +59,6 @@ public class StoreSerieActivity extends Activity{
         networkrequest.execute(url);
         image = (ImageView)findViewById(R.id.image_serie);
         image_fan_art = (ImageView)findViewById(R.id.image_fan_art);
-        textViewTitre = (TextView)findViewById(R.id.textview_titre);
         textViewOverview = (TextView)findViewById(R.id.textview_overflow);
         textview_nomber_saisonactual = (TextView)findViewById(R.id.textview_nomber_saisonactual);
         textview_number_rating = (TextView)findViewById(R.id.textview_number_rating);
@@ -324,7 +322,6 @@ public class StoreSerieActivity extends Activity{
 				     Dao_Series.open();
 				     store_Series = Dao_Series.getById(Integer.parseInt(Series.get(i).get_id()));
 				     Dao_Series.close();
-					 textViewTitre.setText(Series.get(i).get_SeriesName());
 				     textViewOverview.setText(Series.get(i).get_Overview());
 					 float rating = Float.parseFloat(Series.get(i).get_Rating());
 					 ratingbar.setRating(rating);
@@ -332,7 +329,7 @@ public class StoreSerieActivity extends Activity{
 					 textview_nomber_saisonactual.setText("Number total of seasons : "+Series.get(i).get_nombre_saison());
 					 textview_nomber_user_saisonactual.setText("Your actual season : "+store_Series.get_actual_season_user());
 					 textview_nomber_user_episodeactual.setText("Your actual episode : "+store_Series.get_actual_episode_user());
-					 textview_number_rating.setText(Series.get(i).get_RatingCount()+" votes");
+					 textview_number_rating.setText(Series.get(i).get_RatingCount()+" votes ("+Series.get(i).get_Rating()+")");
 					 String genres = Series.get(i).get_Genre();
 					 genres = genres.substring(1, genres.length()-1); 
 					 genres = genres.replace("|", ", ");

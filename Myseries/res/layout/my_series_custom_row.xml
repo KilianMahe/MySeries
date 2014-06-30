@@ -1,43 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="65dp"
-    android:orientation="horizontal" >
-    
-    <RelativeLayout android:id="@+id/relative_Image"
-        			android:layout_width="wrap_content"
-        			android:layout_height="match_parent">
-        			
-	    <ImageView android:id="@+id/ImageView_FanArt"
-	        	   android:layout_width="wrap_content"
-	        	   android:layout_height="match_parent"
-	        	   android:adjustViewBounds="true"
-	        	   android:contentDescription="image serie"
-	        	   />
-	    
-	    <TextView android:id="@+id/TextView_Name"
-	        	  android:layout_width="wrap_content"
-	        	  android:layout_height="wrap_content"
-	        	  android:textStyle="bold"
-	     		  android:textSize="15sp"
-	        	  android:textColor="@color/black"
-	        	  android:layout_centerInParent="true" />
-	    
-	    <TextView android:id="@+id/TextView_Actual_season"
-	        	  android:layout_width="wrap_content"
-	        	  android:layout_height="wrap_content"
-	        	  android:layout_marginRight="5dp"
-	        	  android:textColor="@color/black"
-	        	  android:layout_toLeftOf="@+id/TextView_Actual_episode"
-	        	  android:layout_below="@+id/TextView_Name"/>
-	    
-	    <TextView android:id="@+id/TextView_Actual_episode"
-	        	  android:layout_width="wrap_content"
-	        	  android:layout_height="wrap_content"
-	        	  android:textColor="@color/black"
-	        	  android:layout_alignParentRight="true"
-	        	  android:layout_below="@+id/TextView_Name"/>
-    
-    </RelativeLayout>
-
-</LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>    
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     			 android:id="@+id/relative_Image"
+     			 android:layout_height="65dp"
+     			 android:layout_width="match_parent"
+     			 android:background="@color/white"
+     			 >
+     			
+  <ImageView android:id="@+id/ImageView_FanArt"
+      	   android:layout_width="wrap_content"
+      	   android:layout_height="match_parent"
+      	   android:layout_marginLeft="5dp"
+      	   android:adjustViewBounds="true"
+      	   android:contentDescription="image serie"
+      	   />
+  
+  <TextView android:id="@+id/TextView_Name"
+      	  android:layout_width="wrap_content"
+      	  android:layout_height="wrap_content"
+      	  android:textStyle="bold"
+      	  android:layout_marginLeft="10dp"
+   		  android:textSize="15sp"
+      	  android:textColor="@color/black"
+      	  android:layout_toRightOf="@+id/ImageView_FanArt" />
+  
+  <TextView android:id="@+id/TextView_Actual_season"
+      	  android:layout_width="wrap_content"
+      	  android:layout_height="wrap_content"
+      	  android:layout_marginLeft="10dp"
+      	  android:textColor="@color/black"
+      	  android:layout_toRightOf="@+id/ImageView_FanArt"
+      	  android:layout_below="@+id/TextView_Name"/>
+  
+  <TextView android:id="@+id/TextView_Actual_episode"
+      	  android:layout_width="wrap_content"
+      	  android:layout_height="wrap_content"
+      	  android:textColor="@color/black"
+      	  android:layout_toRightOf="@+id/TextView_Actual_season"
+      	  android:layout_marginLeft="5dp"
+      	  android:layout_below="@+id/TextView_Name"/>
+  
+  <TextView android:id="@+id/TextView_Next_Episode"
+      	  android:layout_width="wrap_content"
+      	  android:layout_height="wrap_content"
+      	  android:layout_marginLeft="10dp"
+      	  android:textColor="@color/black"
+      	  android:layout_toRightOf="@+id/ImageView_FanArt"
+      	  android:layout_below="@+id/TextView_Actual_season"
+      	  android:text="Next episode : Unknow"/>
+ 
+ </RelativeLayout>
