@@ -14,7 +14,9 @@ public class MyBaseSQLite extends SQLiteOpenHelper {
 								"fanart TEXT NOT NULL," +
 								"nextepisode TEXT NOT NULL," +
 								"actualseasonuser INTEGER NOT NULL," +
-								"actualepisodeuser INTEGER NOT NULL);";
+								"actualepisodeuser INTEGER NOT NULL,"+
+								"numberavailableepisode INTEGER NOT NULL,"+
+								"numberavailableepisodeuserseen INTEGER NOT NULL);";
 
 	
 

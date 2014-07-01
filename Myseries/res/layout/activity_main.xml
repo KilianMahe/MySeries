@@ -4,6 +4,42 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     tools:context="${packageName}.${activityClass}" >
+    
+    <LinearLayout 
+        android:id="@+id/Linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        
+        <Button 
+            android:id="@+id/button_all"
+            android:layout_height="match_parent"
+        	android:layout_width="0px"
+        	android:layout_weight="1"
+        	android:text="ALL"
+        	android:background="@drawable/button_add"
+        	/>
+        
+        <Button 
+            android:id="@+id/button_available"
+            android:layout_height="match_parent"
+        	android:layout_width="0px"
+        	android:layout_weight="1"
+        	android:text="Available"
+        	android:background="@drawable/button_add"
+        	/>
+        
+        <Button 
+            android:id="@+id/button_at_see"
+            android:layout_height="match_parent"
+        	android:layout_width="0px"
+        	android:layout_weight="1"
+        	android:text="At see"
+        	android:background="@drawable/button_add"
+        	/>
+        
+        
+    </LinearLayout>
 
     <ListView
           android:id="@+id/listViewSerie"
@@ -12,7 +48,7 @@
           android:layout_above="@+id/buttonAdd"
           android:layout_alignParentLeft="true"
           android:layout_alignParentRight="true"
-          android:layout_alignParentTop="true"
+          android:layout_below="@+id/Linear"
           android:layout_marginRight="5dp"
           android:layout_marginLeft="5dp"
           android:layout_marginTop="5dp"

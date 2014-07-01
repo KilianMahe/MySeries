@@ -5,6 +5,8 @@ public class StoreSerie {
 	private String _SerieName;
 	private String _FanArt;
 	private String _NextEpisode;
+	private int _Number_available_episode;
+	private int _Number_available_episode_user_seen;
 	private int _actual_season_user;
 	private int _actual_episode_user;
 	
@@ -12,13 +14,17 @@ public class StoreSerie {
 		super();
 	}
 
-	public StoreSerie(int _id, String _SerieName, String _FanArt, String _NextEpisode,
-			int _actual_season_user, int _actual_episode_user) {
+	public StoreSerie(int _id, String _SerieName, String _FanArt,
+			String _NextEpisode, int _actual_season_user,
+			int _actual_episode_user, int _Number_available_episode,
+			int _Number_available_episode_user_seen) {
 		super();
 		this._id = _id;
 		this._SerieName = _SerieName;
 		this._FanArt = _FanArt;
 		this._NextEpisode = _NextEpisode;
+		this._Number_available_episode = _Number_available_episode;
+		this._Number_available_episode_user_seen = _Number_available_episode_user_seen;
 		this._actual_season_user = _actual_season_user;
 		this._actual_episode_user = _actual_episode_user;
 	}
@@ -70,4 +76,23 @@ public class StoreSerie {
 	public final void set_NextEpisode(String _NextEpisode) {
 		this._NextEpisode = _NextEpisode;
 	}
+
+	public final int get_Number_available_episode() {
+		return _Number_available_episode;
+	}
+
+	public final void set_Number_available_episode(int _Number_available_episode) {
+		this._Number_available_episode = _Number_available_episode;
+	}
+
+	public final int get_Number_available_episode_user_seen() {
+		return _Number_available_episode_user_seen;
+	}
+
+	public final void set_Number_available_episode_user_seen(
+			int _Number_available_episode_user_seen) {
+		this._Number_available_episode_user_seen = _Number_available_episode_user_seen;
+	}
+	
+	
 }

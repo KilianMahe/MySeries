@@ -1,51 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>    
  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      			 android:id="@+id/relative_Image"
-     			 android:layout_height="75dp"
+     			 android:layout_height="85dp"
      			 android:layout_width="match_parent"
      			 android:background="@color/white"
      			 >
      			
-  <ImageView android:id="@+id/ImageView_FanArt"
-      	   android:layout_width="wrap_content"
-      	   android:layout_height="match_parent"
-      	   android:layout_marginLeft="5dp"
-      	   android:adjustViewBounds="true"
-      	   android:contentDescription="image serie"
-      	   />
-  
-  <TextView android:id="@+id/TextView_Name"
-      	  android:layout_width="wrap_content"
-      	  android:layout_height="wrap_content"
-      	  android:textStyle="bold"
-      	  android:layout_marginLeft="10dp"
-   		  android:textSize="15sp"
-      	  android:textColor="@color/black"
-      	  android:layout_toRightOf="@+id/ImageView_FanArt" />
-  
-  <TextView android:id="@+id/TextView_Actual_season"
-      	  android:layout_width="wrap_content"
-      	  android:layout_height="wrap_content"
-      	  android:layout_marginLeft="10dp"
-      	  android:textColor="@color/black"
-      	  android:layout_toRightOf="@+id/ImageView_FanArt"
-      	  android:layout_below="@+id/TextView_Name"/>
-  
-  <TextView android:id="@+id/TextView_Actual_episode"
-      	  android:layout_width="wrap_content"
-      	  android:layout_height="wrap_content"
-      	  android:textColor="@color/black"
-      	  android:layout_toRightOf="@+id/TextView_Actual_season"
-      	  android:layout_marginLeft="5dp"
-      	  android:layout_below="@+id/TextView_Name"/>
-  
-  <TextView android:id="@+id/TextView_Next_Episode"
-      	  android:layout_width="wrap_content"
-      	  android:layout_height="wrap_content"
-      	  android:layout_marginLeft="10dp"
-      	  android:textColor="@color/black"
-      	  android:layout_toRightOf="@+id/ImageView_FanArt"
-      	  android:layout_below="@+id/TextView_Actual_season"
-      	  android:text="Next episode : Unknow"/>
- 
- </RelativeLayout>
+	 
+	  
+		  <ImageView android:id="@+id/ImageView_FanArt"
+		      	   android:layout_width="wrap_content"
+		      	   android:layout_height="match_parent"
+		      	   android:layout_marginLeft="5dp"
+		      	   android:adjustViewBounds="true"
+		      	   android:contentDescription="image serie"
+		      	   />
+		  
+		 <RelativeLayout
+		     android:id="@+id/relative" 
+		      android:layout_toRightOf="@+id/ImageView_FanArt"
+		      android:layout_height="wrap_content"
+		      android:layout_width="match_parent"
+		      android:layout_centerVertical="true">
+		      
+			   <TextView android:id="@+id/TextView_Name"
+			      	  android:layout_width="wrap_content"
+			      	  android:layout_height="wrap_content"
+			      	  android:textStyle="bold"
+			      	  android:layout_marginLeft="10dp"
+			   		  android:textSize="15sp"
+			   		  android:layout_alignParentLeft="true"
+			      	  android:textColor="@color/black"
+			      	   />
+			  
+			  <TextView android:id="@+id/TextView_Actual_season"
+			      	  android:layout_width="wrap_content"
+			      	  android:layout_height="wrap_content"
+			      	  android:layout_marginLeft="10dp"
+			      	  android:textColor="@color/black"
+			      	  android:layout_alignParentLeft="true"
+			      	  android:layout_below="@+id/TextView_Name"/>
+			  
+			  <TextView android:id="@+id/TextView_Actual_episode"
+			      	  android:layout_width="wrap_content"
+			      	  android:layout_height="wrap_content"
+			      	  android:textColor="@color/black"
+			      	  android:layout_toRightOf="@+id/TextView_Actual_season"
+			      	  android:layout_marginLeft="5dp"
+			      	  android:layout_below="@+id/TextView_Name"/>
+			  
+			  <TextView android:id="@+id/TextView_Next_Episode"
+			      	  android:layout_width="wrap_content"
+			      	  android:layout_height="wrap_content"
+			      	  android:layout_marginLeft="10dp"
+			      	  android:textColor="@color/black"
+			      	  android:layout_alignParentLeft="true"
+			      	  android:layout_below="@+id/TextView_Actual_season"
+			      	  android:text="Next episode : Unknow"/>
+			  
+		</RelativeLayout>
+		
+		<ProgressBar 
+			      android:id="@+id/progressBar"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_toRightOf="@+id/ImageView_FanArt"
+				  android:layout_alignRight="@+id/relative"
+				  android:layout_marginLeft="5dp"
+				  android:layout_marginRight="5dp"
+				  android:layout_alignParentBottom="true"
+				  android:layout_below="@+id/relative"
+				  android:progress="50"
+				  android:max="100"
+				  android:visibility="visible"
+				  style="?android:attr/progressBarStyleHorizontal"
+			      />
+		  
+</RelativeLayout>
+		  

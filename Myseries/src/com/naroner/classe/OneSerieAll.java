@@ -1,6 +1,10 @@
 package com.naroner.classe;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class OneSerieAll {
 	private String _id;
@@ -286,6 +290,68 @@ public class OneSerieAll {
 			date = "Unknow";
 		}
 		return date;
+	}
+	
+	public int get_number_of_available_episode(){
+		int number = 0;
+		for(int i = 0; i < _episode.size(); i++){
+			try {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			   	String dateInString1 = _episode.get(i).get_FirstAired();
+		   		Date date = formatter.parse(dateInString1);
+		   		Calendar nowDate = Calendar.getInstance();
+		   		long millisecondsNext = date.getTime();; 
+		   		long millisecondsToday = nowDate.getTimeInMillis();
+		   		long diff = millisecondsNext - millisecondsToday;
+		   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+		   		String NextEpisodeText;
+		   		String RSeason = _episode.get(i).get_Combined_season();
+	   			RSeason = RSeason.replace(".0", "");
+		   		if((diffDays < 0) &&
+	   					(Integer.parseInt(RSeason) != 0)){
+		   			number++;
+		   		}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return number;
+	}
+	
+	public int get_number_of_user_seen_episode(String saison, String episode){
+		int number = 0;
+		for(int i = 0; i < _episode.size(); i++){
+			try {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			   	String dateInString1 = _episode.get(i).get_FirstAired();
+		   		Date date = formatter.parse(dateInString1);
+		   		Calendar nowDate = Calendar.getInstance();
+		   		long millisecondsNext = date.getTime();; 
+		   		long millisecondsToday = nowDate.getTimeInMillis();
+		   		long diff = millisecondsNext - millisecondsToday;
+		   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+		   		String NextEpisodeText;
+		   		if(diffDays < 0){
+		   			String RSeason = _episode.get(i).get_Combined_season();
+		   			RSeason = RSeason.replace(".0", "");
+		   			String REpisode = _episode.get(i).get_Combined_episodenumber();
+		   			REpisode = REpisode.replace(".0", "");
+		   			if((Integer.parseInt(RSeason) < Integer.parseInt(saison)) &&
+		   					(Integer.parseInt(RSeason) != 0)){
+		   				number++;
+		   			}
+		   			if((Integer.parseInt(RSeason) == Integer.parseInt(saison)) &&
+	   						(Integer.parseInt(REpisode) <= Integer.parseInt(episode))){
+	   					number++;
+	   				}
+		   		}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return number;
 	}
 
 }

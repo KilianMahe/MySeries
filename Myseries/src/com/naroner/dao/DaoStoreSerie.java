@@ -40,7 +40,7 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 			isNewDb = true;
 		//}
 		Cursor c = bdd.query("serie",
-				new String[] {"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser"},
+				new String[] {"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser" , "numberavailableepisode" , "numberavailableepisodeuserseen"},
 				"id" + " = " + id , null, null, null, null);
 
 		StoreSerie result = cursorToSerie(c);
@@ -52,7 +52,7 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 
 	@Override
 	public Cursor getAll() {
-		return bdd.query("serie", new String[]{"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser"}, null, null, null, null, null, null);
+		return bdd.query("serie", new String[]{"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser", "numberavailableepisode", "numberavailableepisodeuserseen"}, null, null, null, null, null, null);
 
 	}
 
@@ -65,6 +65,8 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 		values.put("nextepisode", out.get_NextEpisode());
 		values.put("actualseasonuser", out.get_actual_season_user());
 		values.put("actualepisodeuser", out.get_actual_episode_user());
+		values.put("numberavailableepisode", out.get_Number_available_episode());
+		values.put("numberavailableepisodeuserseen", out.get_Number_available_episode_user_seen());
 		return bdd.insert("serie", null, values);
 	}
 
@@ -76,6 +78,8 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 		values.put("nextepisode", object.get_NextEpisode());
 		values.put("actualseasonuser", object.get_actual_season_user());
 		values.put("actualepisodeuser", object.get_actual_episode_user());
+		values.put("numberavailableepisode", object.get_Number_available_episode());
+		values.put("numberavailableepisodeuserseen", object.get_Number_available_episode_user_seen());
 		return bdd.update("serie", values, "id" + " = " +id, null);
 	}
 
@@ -96,12 +100,14 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 		serie.set_NextEpisode(c.getString(3));
 		serie.set_actual_season_user(c.getInt(4));
 		serie.set_actual_episode_user(c.getInt(5));
+		serie.set_Number_available_episode(c.getInt(6));
+		serie.set_Number_available_episode_user_seen(c.getInt(7));
  
 		return serie;
 	}
 	
 	public ArrayList<StoreSerie> cursorToArraySerie(){
-		Cursor c = bdd.query("serie", new String[]{"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser"}, null, null, null, null, null, null);
+		Cursor c = bdd.query("serie", new String[]{"id", "seriename", "fanart", "nextepisode", "actualseasonuser", "actualepisodeuser", "numberavailableepisode", "numberavailableepisodeuserseen"}, null, null, null, null, null, null);
 		if (c.getCount() == 0){
 			return null;
 		}
@@ -117,6 +123,8 @@ public class DaoStoreSerie implements Daobase<StoreSerie>{
 				serie.set_NextEpisode(c.getString(3));
 				serie.set_actual_season_user(c.getInt(4));
 				serie.set_actual_episode_user(c.getInt(5));
+				serie.set_Number_available_episode(c.getInt(6));
+				serie.set_Number_available_episode_user_seen(c.getInt(7));
 				storeSeries.add(serie);
 				c.moveToNext();
 			}

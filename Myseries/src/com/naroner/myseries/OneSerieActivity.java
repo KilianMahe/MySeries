@@ -137,8 +137,12 @@ public class OneSerieActivity extends Activity{
 	            													   Series.get(0).get_date_of_next_episode(
 	            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
 	            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)), 
-	            													   spinner_saison.getSelectedItemPosition() + 1, 
-	            													   spinner_episode.getSelectedItemPosition() + 1);
+	            													   (spinner_saison.getSelectedItemPosition() + 1), 
+	            													   (spinner_episode.getSelectedItemPosition() + 1),
+	            													   Series.get(0).get_number_of_available_episode(),
+	            													   Series.get(0).get_number_of_user_seen_episode(
+	            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
+	            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)));
 	            	Dao_Series.insertObject(serie);
 	            }
 	            Dao_Series.close();

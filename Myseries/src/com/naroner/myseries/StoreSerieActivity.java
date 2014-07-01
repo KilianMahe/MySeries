@@ -1,7 +1,11 @@
 package com.naroner.myseries;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -149,18 +153,22 @@ public class StoreSerieActivity extends Activity{
 	        public void onClick(DialogInterface dialog, int id) {
 	        	final DaoStoreSerie Dao_Series = new DaoStoreSerie(context);
 	        	Dao_Series.open();
-            	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
-            													   Series.get(0).get_SeriesName(), 
-            													   Series.get(0).get_fanart(),
-            													   Series.get(0).get_date_of_next_episode(
-            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
-            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)),
-            													   spinner_saison.getSelectedItemPosition() + 1, 
-            													   spinner_episode.getSelectedItemPosition() + 1);
+	        	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
+						   Series.get(0).get_SeriesName(), 
+						   Series.get(0).get_poster(), 
+						   Series.get(0).get_date_of_next_episode(
+								   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
+								   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)), 
+						   spinner_saison.getSelectedItemPosition() + 1, 
+						   spinner_episode.getSelectedItemPosition() + 1,
+						   Series.get(0).get_number_of_available_episode(),
+						   Series.get(0).get_number_of_user_seen_episode(
+								   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
+								   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)));
             	Dao_Series.updateObject(Integer.parseInt(Series.get(0).get_id()), serie);
 	            Dao_Series.close();
-	            textview_nomber_user_saisonactual.setText("Your actual season : "+(spinner_saison.getSelectedItemPosition() + 1));
-				textview_nomber_user_episodeactual.setText("Your actual episode : "+(spinner_episode.getSelectedItemPosition() + 1));
+	            Intent intent = new Intent(StoreSerieActivity.this, MainActivity.class);
+			    startActivity(intent);
 	            dialog.cancel();
 	        }
 	    });
@@ -338,8 +346,26 @@ public class StoreSerieActivity extends Activity{
 					 ratingbar.setRating(rating);
 					 setTitle(Series.get(i).get_SeriesName());
 					 textview_nomber_saisonactual.setText("Number total of seasons : "+Series.get(i).get_nombre_saison());
-					 textview_nomber_user_saisonactual.setText("Your actual season : "+store_Series.get_actual_season_user());
-					 textview_nomber_user_episodeactual.setText("Your actual episode : "+store_Series.get_actual_episode_user());
+					 textview_nomber_user_saisonactual.setText("Your actual episode : "+store_Series.get_actual_season_user() + "." + store_Series.get_actual_episode_user());
+					try {
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					   	String dateInString1 = store_Series.get_NextEpisode();
+				   		Date date = formatter.parse(dateInString1);
+				   		Calendar nowDate = Calendar.getInstance();
+				   		long millisecondsNext = date.getTime();; 
+				   		long millisecondsToday = nowDate.getTimeInMillis();
+				   		long diff = millisecondsNext - millisecondsToday;
+				   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+				   		String NextEpisodeText;
+				   		if(diffDays > 0){
+				   			textview_nomber_user_episodeactual.setText("Your next episode is available on " + dateInString1);
+				   		}else{
+				   			textview_nomber_user_episodeactual.setText("Your next episode is already available");
+				   		}	 
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					 textview_number_rating.setText(Series.get(i).get_RatingCount()+" votes ("+Series.get(i).get_Rating()+")");
 					 String genres = Series.get(i).get_Genre();
 					 genres = genres.substring(1, genres.length()-1); 

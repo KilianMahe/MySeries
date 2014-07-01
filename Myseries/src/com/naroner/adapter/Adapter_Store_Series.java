@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.naroner.classe.StoreSerie;
@@ -25,8 +26,10 @@ import com.naroner.myseries.R;
 
 public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	ImageView image;
+	Context _context;
 	public Adapter_Store_Series(Context context, ArrayList<StoreSerie> series) {
 	       super(context, R.layout.my_series_custom_row, series);
+	       _context = context;
 	    }
 
 	    @Override
@@ -43,6 +46,7 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	       TextView tvActual_Season = (TextView) convertView.findViewById(R.id.TextView_Actual_season);
 	       TextView tvActual_Episode = (TextView) convertView.findViewById(R.id.TextView_Actual_episode);
 	       TextView TextView_Next_Episode = (TextView) convertView.findViewById(R.id.TextView_Next_Episode);
+	       ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 	       // Populate the data into the template view using the data object
 	       new DownloadImageTaskFanArt((ImageView) convertView.findViewById(R.id.ImageView_FanArt))
 	        .execute(image, "http://thetvdb.com/banners/_cache/"+serie.get_FanArt());
@@ -52,15 +56,16 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	   	   String dateInString = serie.get_NextEpisode();
 	   	   if(dateInString != "Unknow"){
 			   try {
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				   	String dateInString1 = serie.get_NextEpisode();
 			   		Date date = formatter.parse(dateInString1);
-			   		Calendar calNext = Calendar.getInstance();
-			   		calNext.setTime(date);
 			   		Calendar nowDate = Calendar.getInstance();
-			   		if(nowDate.before(calNext)){
-			   			int diff =  calculateDifference(calNext.getTime(), nowDate.getTime());
-				   		TextView_Next_Episode.setText("Next episode in " + (Integer.toString(diff)) + " days");
+			   		long millisecondsNext = date.getTime();; 
+			   		long millisecondsToday = nowDate.getTimeInMillis();
+			   		long diff = millisecondsNext - millisecondsToday;
+			   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+			   		if(diffDays > 0){
+				   		TextView_Next_Episode.setText("Next episode in " + diffDays + " days");
 			   		}else{
 			   			TextView_Next_Episode.setText("Next episode already available");
 			   		}
@@ -71,6 +76,9 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	   	   }else{
 	   		TextView_Next_Episode.setText("Next episode : " + dateInString);
 	   	   }
+	   	progressBar.setMax(serie.get_Number_available_episode());
+	   	progressBar.setProgress(serie.get_Number_available_episode_user_seen());
+	   	progressBar.setSecondaryProgress(serie.get_Number_available_episode());
 	       // Return the completed view to render on screen
 	       return convertView;
 	   }
