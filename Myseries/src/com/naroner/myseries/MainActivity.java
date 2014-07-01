@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import com.naroner.adapter.Adapter_Store_Series;
@@ -38,6 +40,7 @@ public class MainActivity extends Activity {
         final DaoStoreSerie Dao_Series = new DaoStoreSerie(this);
         Dao_Series.open();
         store_Series = Dao_Series.cursorToArraySerie();
+        Collections.sort(store_Series, new SerieComparator());
         Dao_Series.close();
         
         buttonAdd = (Button)findViewById(R.id.buttonAdd);
@@ -74,6 +77,7 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
+			        Collections.sort(store_Series, new SerieComparator());
 			        Dao_Series.close();
 			        if(store_Series != null){
 			        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series);
@@ -93,6 +97,7 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
+			        Collections.sort(store_Series, new SerieComparator());
 			        Dao_Series.close();
 			        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
 			        for(int i = 0; i < store_Series.size(); i++){
@@ -132,6 +137,7 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
+			        Collections.sort(store_Series, new SerieComparator());
 			        Dao_Series.close();
 			        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
 			        for(int i = 0; i < store_Series.size(); i++){
@@ -179,5 +185,15 @@ public class MainActivity extends Activity {
 			    }else{
 			        iv.setBackgroundDrawable(drawable);
 			    }
+			}
+			
+			public class SerieComparator implements Comparator<StoreSerie> {
+				public int compare(StoreSerie StoreSerie1, StoreSerie StoreSerie2) {
+					int result =  StoreSerie1.get_NextEpisode().compareTo(StoreSerie2.get_NextEpisode());
+					if(result == 0){
+						result = StoreSerie1.get_SerieName().compareTo(StoreSerie2.get_SerieName());
+					}
+					return result;
+				}
 			}
 }

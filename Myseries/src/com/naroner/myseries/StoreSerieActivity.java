@@ -132,7 +132,7 @@ public class StoreSerieActivity extends Activity{
 	    
 	    final Spinner spinner_episode = new Spinner(this);
 	    final ArrayList<String> spinnerArrayEpisode = new ArrayList<String>();
-	    for(int a = 0; a < Series.get(0).get_nombre_episodes_on_saison(store_Series.get_actual_season_user() - 1); a++){
+	    for(int a = 0; a < Series.get(0).get_nombre_episodes_on_saison(store_Series.get_actual_season_user()); a++){
 	    	spinnerArrayEpisode.add("Episode " + (a + 1));
 	    }
 	    ArrayAdapter<String> spinnerArrayAdapterEpisode = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArrayEpisode);

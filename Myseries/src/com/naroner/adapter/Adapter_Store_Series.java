@@ -59,7 +59,7 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	       tvActual_Season.setText("Season : " + Integer.toString(serie.get_actual_season_user()));
 	       tvActual_Episode.setText("Episode : " + Integer.toString(serie.get_actual_episode_user()));
 	   	   String dateInString = serie.get_NextEpisode();
-	   	   if(dateInString != "Unknow"){
+	   	   if(!dateInString.equals("Unknow")){
 			   try {
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				   	String dateInString1 = serie.get_NextEpisode();
