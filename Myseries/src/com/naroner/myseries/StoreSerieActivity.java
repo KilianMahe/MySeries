@@ -2,6 +2,7 @@ package com.naroner.myseries;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -25,6 +26,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
+
 import com.naroner.classe.OneSerieAll;
 import com.naroner.classe.StoreSerie;
 import com.naroner.classe.episode;
@@ -83,6 +85,12 @@ public class StoreSerieActivity extends Activity{
         	}
         });        
     }
+	
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(StoreSerieActivity.this, MainActivity.class);
+	    startActivity(intent);
+	}
 	
 	public void dialogueUpdateSerie(){
 		final Context context = this;
@@ -143,7 +151,10 @@ public class StoreSerieActivity extends Activity{
 	        	Dao_Series.open();
             	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
             													   Series.get(0).get_SeriesName(), 
-            													   Series.get(0).get_fanart(), 
+            													   Series.get(0).get_fanart(),
+            													   Series.get(0).get_date_of_next_episode(
+            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
+            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)),
             													   spinner_saison.getSelectedItemPosition() + 1, 
             													   spinner_episode.getSelectedItemPosition() + 1);
             	Dao_Series.updateObject(Integer.parseInt(Series.get(0).get_id()), serie);

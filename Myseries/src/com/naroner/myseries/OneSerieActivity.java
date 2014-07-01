@@ -133,7 +133,10 @@ public class OneSerieActivity extends Activity{
 	            if(Dao_Series.getById(Integer.parseInt(Series.get(0).get_id())) == null){
 	            	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
 	            													   Series.get(0).get_SeriesName(), 
-	            													   Series.get(0).get_fanart(), 
+	            													   Series.get(0).get_poster(), 
+	            													   Series.get(0).get_date_of_next_episode(
+	            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
+	            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)), 
 	            													   spinner_saison.getSelectedItemPosition() + 1, 
 	            													   spinner_episode.getSelectedItemPosition() + 1);
 	            	Dao_Series.insertObject(serie);

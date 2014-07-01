@@ -261,5 +261,31 @@ public class OneSerieAll {
 		}
 		return nombre_episode;
 	}
+	
+	public String get_date_of_next_episode(String saison, String episode){
+		String date = "";
+		int episode_int = Integer.parseInt(episode);
+		episode_int++;
+		for(int i = 0; i < _episode.size(); i++){
+			if(_episode.get(i).get_Combined_season().equals(saison) 
+					&& _episode.get(i).get_Combined_episodenumber().equals(Integer.toString(episode_int))){
+				date = _episode.get(i).get_FirstAired();
+			}
+		}
+		int saison_int = Integer.parseInt(saison);
+		saison_int++;
+		if(date == ""){
+			for(int i = 0; i < _episode.size(); i++){
+				if(_episode.get(i).get_Combined_season().equals(Integer.toString(saison_int)) 
+						&& _episode.get(i).get_Combined_episodenumber().equals("1")){
+					date = _episode.get(i).get_FirstAired();
+				}
+			}
+		}
+		if(date.equals("")){
+			date = "Unknow";
+		}
+		return date;
+	}
 
 }

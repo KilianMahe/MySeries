@@ -12,6 +12,7 @@ public class MyBaseSQLite extends SQLiteOpenHelper {
 								"(id INTEGER NOT NULL," +
 								"seriename TEXT NOT NULL," +
 								"fanart TEXT NOT NULL," +
+								"nextepisode TEXT NOT NULL," +
 								"actualseasonuser INTEGER NOT NULL," +
 								"actualepisodeuser INTEGER NOT NULL);";
 

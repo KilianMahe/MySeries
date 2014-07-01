@@ -1,10 +1,16 @@
 package com.naroner.adapter;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.naroner.classe.StoreSerie;
 import com.naroner.myseries.R;
 
@@ -35,12 +42,35 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	       TextView tvName = (TextView) convertView.findViewById(R.id.TextView_Name);
 	       TextView tvActual_Season = (TextView) convertView.findViewById(R.id.TextView_Actual_season);
 	       TextView tvActual_Episode = (TextView) convertView.findViewById(R.id.TextView_Actual_episode);
+	       TextView TextView_Next_Episode = (TextView) convertView.findViewById(R.id.TextView_Next_Episode);
 	       // Populate the data into the template view using the data object
 	       new DownloadImageTaskFanArt((ImageView) convertView.findViewById(R.id.ImageView_FanArt))
 	        .execute(image, "http://thetvdb.com/banners/_cache/"+serie.get_FanArt());
 	       tvName.setText(serie.get_SerieName());
 	       tvActual_Season.setText("Season : " + Integer.toString(serie.get_actual_season_user()));
 	       tvActual_Episode.setText("Episode : " + Integer.toString(serie.get_actual_episode_user()));
+	   	   String dateInString = serie.get_NextEpisode();
+	   	   if(dateInString != "Unknow"){
+			   try {
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+				   	String dateInString1 = serie.get_NextEpisode();
+			   		Date date = formatter.parse(dateInString1);
+			   		Calendar calNext = Calendar.getInstance();
+			   		calNext.setTime(date);
+			   		Calendar nowDate = Calendar.getInstance();
+			   		if(nowDate.before(calNext)){
+			   			int diff =  calculateDifference(calNext.getTime(), nowDate.getTime());
+				   		TextView_Next_Episode.setText("Next episode in " + (Integer.toString(diff)) + " days");
+			   		}else{
+			   			TextView_Next_Episode.setText("Next episode already available");
+			   		}
+			    
+			   } catch (java.text.ParseException e) {
+			   		e.printStackTrace();
+			   }
+	   	   }else{
+	   		TextView_Next_Episode.setText("Next episode : " + dateInString);
+	   	   }
 	       // Return the completed view to render on screen
 	       return convertView;
 	   }
@@ -70,4 +100,41 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 		    		bmImage.setImageBitmap(result);
 		    }
 		}
+	    
+	    public static int calculateDifference(Date a, Date b)
+	    {
+	        int tempDifference = 0;
+	        int difference = 0;
+	        Calendar earlier = Calendar.getInstance();
+	        Calendar later = Calendar.getInstance();
+
+	        if (a.compareTo(b) < 0)
+	        {
+	            earlier.setTime(a);
+	            later.setTime(b);
+	        }
+	        else
+	        {
+	            earlier.setTime(b);
+	            later.setTime(a);
+	        }
+
+	        while (earlier.get(Calendar.YEAR) != later.get(Calendar.YEAR))
+	        {
+	            tempDifference = 365 * (later.get(Calendar.YEAR) - earlier.get(Calendar.YEAR));
+	            difference += tempDifference;
+
+	            earlier.add(Calendar.DAY_OF_YEAR, tempDifference);
+	        }
+
+	        if (earlier.get(Calendar.DAY_OF_YEAR) != later.get(Calendar.DAY_OF_YEAR))
+	        {
+	            tempDifference = later.get(Calendar.DAY_OF_YEAR) - earlier.get(Calendar.DAY_OF_YEAR);
+	            difference += tempDifference;
+
+	            earlier.add(Calendar.DAY_OF_YEAR, tempDifference);
+	        }
+
+	        return difference;
+	    }
 }
