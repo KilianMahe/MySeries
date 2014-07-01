@@ -1,5 +1,6 @@
 package com.naroner.adapter;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,8 +49,12 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	       TextView TextView_Next_Episode = (TextView) convertView.findViewById(R.id.TextView_Next_Episode);
 	       ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 	       // Populate the data into the template view using the data object
-	       new DownloadImageTaskFanArt((ImageView) convertView.findViewById(R.id.ImageView_FanArt))
-	        .execute(image, "http://thetvdb.com/banners/_cache/"+serie.get_FanArt());
+	       /*new DownloadImageTaskFanArt((ImageView) convertView.findViewById(R.id.ImageView_FanArt))
+	        .execute(image, "http://thetvdb.com/banners/_cache/"+serie.get_FanArt());*/
+	       byte[] outImage= serie.get_FanArt();
+	       ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
+	       Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+	       image.setImageBitmap(theImage);
 	       tvName.setText(serie.get_SerieName());
 	       tvActual_Season.setText("Season : " + Integer.toString(serie.get_actual_season_user()));
 	       tvActual_Episode.setText("Episode : " + Integer.toString(serie.get_actual_episode_user()));

@@ -16,25 +16,25 @@
             android:layout_height="match_parent"
         	android:layout_width="0px"
         	android:layout_weight="1"
-        	android:text="ALL"
+        	android:text="All"
         	android:background="@drawable/button_add"
         	/>
         
         <Button 
-            android:id="@+id/button_available"
+            android:id="@+id/button_late"
             android:layout_height="match_parent"
         	android:layout_width="0px"
         	android:layout_weight="1"
-        	android:text="Available"
+        	android:text="Late"
         	android:background="@drawable/button_add"
         	/>
         
         <Button 
-            android:id="@+id/button_at_see"
+            android:id="@+id/button_up_to_date"
             android:layout_height="match_parent"
         	android:layout_width="0px"
         	android:layout_weight="1"
-        	android:text="At see"
+        	android:text="Up to date"
         	android:background="@drawable/button_add"
         	/>
         

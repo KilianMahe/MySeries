@@ -1,5 +1,6 @@
 package com.naroner.myseries;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -128,26 +129,10 @@ public class OneSerieActivity extends Activity{
 	    DialogueComp.setPositiveButton(R.string.text_confirm,
 	            new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int id) {
-	        	final DaoStoreSerie Dao_Series = new DaoStoreSerie(context);
-	        	Dao_Series.open();
-	            if(Dao_Series.getById(Integer.parseInt(Series.get(0).get_id())) == null){
-	            	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
-	            													   Series.get(0).get_SeriesName(), 
-	            													   Series.get(0).get_poster(), 
-	            													   Series.get(0).get_date_of_next_episode(
-	            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
-	            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)), 
-	            													   (spinner_saison.getSelectedItemPosition() + 1), 
-	            													   (spinner_episode.getSelectedItemPosition() + 1),
-	            													   Series.get(0).get_number_of_available_episode(),
-	            													   Series.get(0).get_number_of_user_seen_episode(
-	            															   Integer.toString(spinner_saison.getSelectedItemPosition() + 1), 
-	            															   Integer.toString(spinner_episode.getSelectedItemPosition() + 1)));
-	            	Dao_Series.insertObject(serie);
-	            }
-	            Dao_Series.close();
-	            Intent intent = new Intent(OneSerieActivity.this, MainActivity.class);
-			    startActivity(intent);
+	        	new DownloadImageTaskFanArtByte()
+		        .execute("http://thetvdb.com/banners/_cache/"+Series.get(0).get_poster(),
+		        		Integer.toString(spinner_saison.getSelectedItemPosition() + 1) , 
+		        		Integer.toString(spinner_episode.getSelectedItemPosition() + 1));
 	            dialog.cancel();
 	        }
 	    });
@@ -290,5 +275,62 @@ public class OneSerieActivity extends Activity{
 	        }
 	
 		}
+	
+	private class DownloadImageTaskFanArtByte extends AsyncTask<Object, Void, Bitmap> {
+		ProgressDialog progDailog = new ProgressDialog(OneSerieActivity.this);
+		
+	    public DownloadImageTaskFanArtByte() {
+	    }
+
+	    protected Bitmap doInBackground(Object... urls) {
+	        String urldisplay = (String)urls[0];
+	        Bitmap mIcon11 = null;
+	        try {
+	            InputStream in = new java.net.URL(urldisplay).openStream();
+	            mIcon11 = BitmapFactory.decodeStream(in);
+	            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	            mIcon11.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+	            byte imageInByte[] = stream.toByteArray();
+	            final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
+	        	Dao_Series.open();
+	        	String spiner_saison = (String)urls[1];
+	        	String spiner_episode = (String)urls[2];
+	        	StoreSerie serie = new StoreSerie(Integer.parseInt(Series.get(0).get_id()),
+						   Series.get(0).get_SeriesName(), 
+						   imageInByte, 
+						   Series.get(0).get_date_of_next_episode(
+								   spiner_saison, 
+								   spiner_episode), 
+								   Integer.parseInt(spiner_saison), 
+								   Integer.parseInt(spiner_episode),
+						   Series.get(0).get_number_of_available_episode(),
+						   Series.get(0).get_number_of_user_seen_episode(
+								   spiner_saison, 
+								   spiner_episode));
+            	Dao_Series.insertObject(serie);
+	            Dao_Series.close();
+	            Intent intent = new Intent(OneSerieActivity.this, MainActivity.class);
+			    startActivity(intent);
+	        } catch (Exception e) {
+	            Log.e("Error", e.getMessage());
+	            e.printStackTrace();
+	        }
+	        return mIcon11;
+	    }
+
+	    protected void onPostExecute(Bitmap result) {
+	    	progDailog.dismiss();
+	    }
+	    
+	    @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progDailog.setMessage("Loading...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
+        }
+	}
 
 }

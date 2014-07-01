@@ -3,7 +3,7 @@ package com.naroner.classe;
 public class StoreSerie {
 	private int _id;
 	private String _SerieName;
-	private String _FanArt;
+	private byte[] _FanArt;
 	private String _NextEpisode;
 	private int _Number_available_episode;
 	private int _Number_available_episode_user_seen;
@@ -14,7 +14,7 @@ public class StoreSerie {
 		super();
 	}
 
-	public StoreSerie(int _id, String _SerieName, String _FanArt,
+	public StoreSerie(int _id, String _SerieName, byte[] _FanArt,
 			String _NextEpisode, int _actual_season_user,
 			int _actual_episode_user, int _Number_available_episode,
 			int _Number_available_episode_user_seen) {
@@ -45,11 +45,11 @@ public class StoreSerie {
 		this._SerieName = _SerieName;
 	}
 
-	public String get_FanArt() {
+	public byte[]  get_FanArt() {
 		return _FanArt;
 	}
 
-	public void set_FanArt(String _FanArt) {
+	public void set_FanArt(byte[]  _FanArt) {
 		this._FanArt = _FanArt;
 	}
 
