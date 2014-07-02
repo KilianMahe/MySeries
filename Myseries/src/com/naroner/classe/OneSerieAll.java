@@ -335,8 +335,26 @@ public class OneSerieAll {
 		   		if(diffDays < 0){
 		   			String RSeason = _episode.get(i).get_Combined_season();
 		   			RSeason = RSeason.replace(".0", "");
+		   			RSeason = RSeason.replace(".1", "");
+		   			RSeason = RSeason.replace(".2", "");
+		   			RSeason = RSeason.replace(".3", "");
+		   			RSeason = RSeason.replace(".4", "");
+		   			RSeason = RSeason.replace(".5", "");
+		   			RSeason = RSeason.replace(".6", "");
+		   			RSeason = RSeason.replace(".7", "");
+		   			RSeason = RSeason.replace(".8", "");
+		   			RSeason = RSeason.replace(".9", "");
 		   			String REpisode = _episode.get(i).get_Combined_episodenumber();
 		   			REpisode = REpisode.replace(".0", "");
+		   			REpisode = REpisode.replace(".1", "");
+		   			REpisode = REpisode.replace(".2", "");
+		   			REpisode = REpisode.replace(".3", "");
+		   			REpisode = REpisode.replace(".4", "");
+		   			REpisode = REpisode.replace(".5", "");
+		   			REpisode = REpisode.replace(".6", "");
+		   			REpisode = REpisode.replace(".7", "");
+		   			REpisode = REpisode.replace(".8", "");
+		   			REpisode = REpisode.replace(".9", "");
 		   			if((Integer.parseInt(RSeason) < Integer.parseInt(saison)) &&
 		   					(Integer.parseInt(RSeason) != 0)){
 		   				number++;

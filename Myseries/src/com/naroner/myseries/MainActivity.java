@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
         final DaoStoreSerie Dao_Series = new DaoStoreSerie(this);
         Dao_Series.open();
         store_Series = Dao_Series.cursorToArraySerie();
-        Collections.sort(store_Series, new SerieComparator());
         Dao_Series.close();
         
         buttonAdd = (Button)findViewById(R.id.buttonAdd);
@@ -51,6 +50,7 @@ public class MainActivity extends Activity {
         listViewSerie = (ListView)findViewById(R.id.listViewSerie);
         
         if(store_Series != null){
+        	Collections.sort(store_Series, new SerieComparator());
         	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series);
         	listViewSerie.setAdapter(_adapter);
         	
@@ -77,9 +77,9 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
-			        Collections.sort(store_Series, new SerieComparator());
 			        Dao_Series.close();
 			        if(store_Series != null){
+			        	Collections.sort(store_Series, new SerieComparator());
 			        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series);
 			        	listViewSerie.setAdapter(_adapter);
 			        }
@@ -97,31 +97,33 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
-			        Collections.sort(store_Series, new SerieComparator());
-			        Dao_Series.close();
-			        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
-			        for(int i = 0; i < store_Series.size(); i++){
-			        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-					   	String dateInString1 = store_Series.get(i).get_NextEpisode();
-				   		Date date;
-						try {
-							date = formatter.parse(dateInString1);
-							Calendar nowDate = Calendar.getInstance();
-					   		long millisecondsNext = date.getTime();; 
-					   		long millisecondsToday = nowDate.getTimeInMillis();
-					   		long diff = millisecondsNext - millisecondsToday;
-					   		long diffDays = diff / (24 * 60 * 60 * 1000); 
-					   		if((diffDays < 0)){
-					   			store_Series_filtred.add(store_Series.get(i));
-					   		}
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			        }
-			        if(store_Series_filtred != null){
-			        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series_filtred);
-			        	listViewSerie.setAdapter(_adapter);
+			        if(store_Series != null){
+				        Collections.sort(store_Series, new SerieComparator());
+				        Dao_Series.close();
+				        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
+				        for(int i = 0; i < store_Series.size(); i++){
+				        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						   	String dateInString1 = store_Series.get(i).get_NextEpisode();
+					   		Date date;
+							try {
+								date = formatter.parse(dateInString1);
+								Calendar nowDate = Calendar.getInstance();
+						   		long millisecondsNext = date.getTime();; 
+						   		long millisecondsToday = nowDate.getTimeInMillis();
+						   		long diff = millisecondsNext - millisecondsToday;
+						   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+						   		if((diffDays < 0)){
+						   			store_Series_filtred.add(store_Series.get(i));
+						   		}
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+				        }
+				        if(store_Series_filtred != null){
+				        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series_filtred);
+				        	listViewSerie.setAdapter(_adapter);
+				        }
 			        }
 				}
 			}
@@ -137,31 +139,36 @@ public class MainActivity extends Activity {
 					final DaoStoreSerie Dao_Series = new DaoStoreSerie(getApplicationContext());
 			        Dao_Series.open();
 			        store_Series = Dao_Series.cursorToArraySerie();
-			        Collections.sort(store_Series, new SerieComparator());
-			        Dao_Series.close();
-			        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
-			        for(int i = 0; i < store_Series.size(); i++){
-			        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-					   	String dateInString1 = store_Series.get(i).get_NextEpisode();
-				   		Date date;
-						try {
-							date = formatter.parse(dateInString1);
-							Calendar nowDate = Calendar.getInstance();
-					   		long millisecondsNext = date.getTime();; 
-					   		long millisecondsToday = nowDate.getTimeInMillis();
-					   		long diff = millisecondsNext - millisecondsToday;
-					   		long diffDays = diff / (24 * 60 * 60 * 1000); 
-					   		if((diffDays > 0)){
-					   			store_Series_filtred.add(store_Series.get(i));
-					   		}
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			        }
-			        if(store_Series_filtred != null){
-			        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series_filtred);
-			        	listViewSerie.setAdapter(_adapter);
+			        if(store_Series != null){
+				        Collections.sort(store_Series, new SerieComparator());
+				        Dao_Series.close();
+				        ArrayList<StoreSerie> store_Series_filtred = new ArrayList<StoreSerie>();
+				        for(int i = 0; i < store_Series.size(); i++){
+				        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						   	String dateInString1 = store_Series.get(i).get_NextEpisode();
+						   	if(dateInString1.equals("Unknow")){
+						   		store_Series_filtred.add(store_Series.get(i));
+						   	}
+					   		Date date;
+							try {
+								date = formatter.parse(dateInString1);
+								Calendar nowDate = Calendar.getInstance();
+						   		long millisecondsNext = date.getTime();; 
+						   		long millisecondsToday = nowDate.getTimeInMillis();
+						   		long diff = millisecondsNext - millisecondsToday;
+						   		long diffDays = diff / (24 * 60 * 60 * 1000); 
+						   		if((diffDays > 0)){
+						   			store_Series_filtred.add(store_Series.get(i));
+						   		}
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+				        }
+				        if(store_Series_filtred != null){
+				        	_adapter = new Adapter_Store_Series(getApplicationContext(), store_Series_filtred);
+				        	listViewSerie.setAdapter(_adapter);
+				        }
 			        }
 				}
 			}

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.naroner.classe.Series;
 import com.naroner.classe.StoreSerie;
 import com.naroner.myseries.R;
 
@@ -72,7 +73,11 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 			   		if(diffDays > 0){
 				   		TextView_Next_Episode.setText("Next episode in " + diffDays + " days");
 			   		}else{
-			   			TextView_Next_Episode.setText("Next episode already available");
+			   			if(diffDays == 0){
+			   				TextView_Next_Episode.setText("Episode available today at " + serie.get_Airs_Time());
+			   			}else{
+			   				TextView_Next_Episode.setText("Next episode already available");
+			   			}
 			   		}
 			    
 			   } catch (java.text.ParseException e) {

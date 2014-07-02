@@ -5,6 +5,7 @@ public class StoreSerie {
 	private String _SerieName;
 	private byte[] _FanArt;
 	private String _NextEpisode;
+	private String _Airs_Time;
 	private int _Number_available_episode;
 	private int _Number_available_episode_user_seen;
 	private int _actual_season_user;
@@ -13,16 +14,21 @@ public class StoreSerie {
 	public StoreSerie() {
 		super();
 	}
+	
+	
 
 	public StoreSerie(int _id, String _SerieName, byte[] _FanArt,
-			String _NextEpisode, int _actual_season_user,
-			int _actual_episode_user, int _Number_available_episode,
+			String _NextEpisode, String _Airs_Time,
+			int _actual_season_user,
+			int _actual_episode_user,
+			int _Number_available_episode,
 			int _Number_available_episode_user_seen) {
 		super();
 		this._id = _id;
 		this._SerieName = _SerieName;
 		this._FanArt = _FanArt;
 		this._NextEpisode = _NextEpisode;
+		this._Airs_Time = _Airs_Time;
 		this._Number_available_episode = _Number_available_episode;
 		this._Number_available_episode_user_seen = _Number_available_episode_user_seen;
 		this._actual_season_user = _actual_season_user;
@@ -75,6 +81,14 @@ public class StoreSerie {
 
 	public final void set_NextEpisode(String _NextEpisode) {
 		this._NextEpisode = _NextEpisode;
+	}
+
+	public final String get_Airs_Time() {
+		return _Airs_Time;
+	}
+
+	public final void set_Airs_Time(String _Airs_Time) {
+		this._Airs_Time = _Airs_Time;
 	}
 
 	public final int get_Number_available_episode() {

@@ -31,6 +31,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
+
 import com.naroner.classe.OneSerieAll;
 import com.naroner.classe.StoreSerie;
 import com.naroner.classe.episode;
@@ -346,8 +347,12 @@ public class StoreSerieActivity extends Activity{
 				   		if(diffDays > 0){
 				   			textview_nomber_user_episodeactual.setText("Your next episode is available on " + dateInString1);
 				   		}else{
-				   			textview_nomber_user_episodeactual.setText("Your next episode is already available");
-				   		}	 
+				   			if(diffDays == 0){
+				   				textview_nomber_user_episodeactual.setText("Episode available today at " + Series.get(i).get_Airs_Time());
+				   			}else{
+				   				textview_nomber_user_episodeactual.setText("Next episode already available");
+				   			}
+				   		} 
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -401,7 +406,8 @@ public class StoreSerieActivity extends Activity{
 						   imageInByte, 
 						   Series.get(0).get_date_of_next_episode(
 								   spiner_saison, 
-								   spiner_episode), 
+								   spiner_episode),
+								   Series.get(0).get_Airs_Time(),
 								   Integer.parseInt(spiner_saison), 
 								   Integer.parseInt(spiner_episode),
 						   Series.get(0).get_number_of_available_episode(),

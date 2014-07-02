@@ -300,7 +300,8 @@ public class OneSerieActivity extends Activity{
 						   imageInByte, 
 						   Series.get(0).get_date_of_next_episode(
 								   spiner_saison, 
-								   spiner_episode), 
+								   spiner_episode),
+								   Series.get(0).get_Airs_Time(),
 								   Integer.parseInt(spiner_saison), 
 								   Integer.parseInt(spiner_episode),
 						   Series.get(0).get_number_of_available_episode(),
