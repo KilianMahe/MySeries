@@ -11,6 +11,7 @@ import java.util.Date;
 import com.naroner.adapter.Adapter_Store_Series;
 import com.naroner.classe.StoreSerie;
 import com.naroner.dao.DaoStoreSerie;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	Button buttonAdd;
@@ -30,6 +32,7 @@ public class MainActivity extends Activity {
 	ListView listViewSerie;
 	Adapter_Store_Series _adapter;
 	ArrayList<StoreSerie> store_Series = new ArrayList<StoreSerie>();
+	private static long backPressed;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,4 +206,16 @@ public class MainActivity extends Activity {
 					return result;
 				}
 			}
+			
+			 @Override
+			    public void onBackPressed() {
+			    	if (backPressed + 2000 > System.currentTimeMillis()){
+						Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+						homeIntent.addCategory( Intent.CATEGORY_HOME );
+						homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(homeIntent);			
+					}
+			    	else Toast.makeText(getBaseContext(), "Press back again to quit !", Toast.LENGTH_SHORT).show();
+			        backPressed = System.currentTimeMillis();
+			    }
 }
