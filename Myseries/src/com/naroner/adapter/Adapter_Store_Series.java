@@ -88,7 +88,7 @@ public class Adapter_Store_Series extends ArrayAdapter<StoreSerie> {
 	   	   }
 	   	progressBar.setMax(serie.get_Number_available_episode());
 	   	progressBar.setProgress(serie.get_Number_available_episode_user_seen());
-	   	progressBar.setSecondaryProgress(serie.get_Number_available_episode());
+	   	//progressBar.setSecondaryProgress(serie.get_Number_available_episode());
 	       // Return the completed view to render on screen
 	       return convertView;
 	   }
