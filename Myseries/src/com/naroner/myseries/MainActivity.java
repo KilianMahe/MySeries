@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 import com.naroner.adapter.Adapter_Store_Series;
+import com.naroner.classe.MyService;
 import com.naroner.classe.StoreSerie;
 import com.naroner.dao.DaoStoreSerie;
 
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startService(new Intent(getApplicationContext(), MyService.class));
         
         //BDD
         final DaoStoreSerie Dao_Series = new DaoStoreSerie(this);
@@ -180,6 +182,7 @@ public class MainActivity extends Activity {
         buttonAdd.setOnClickListener(new Button.OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				stopService(new Intent(getApplicationContext(), MyService.class));
 			    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
 			    startActivity(intent);
 			}

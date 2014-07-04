@@ -26,6 +26,7 @@
         <activity android:name="com.naroner.myseries.SearchActivity" />
         <activity android:name="com.naroner.myseries.OneSerieActivity" />
         <activity android:name="com.naroner.myseries.StoreSerieActivity" />
+        <service android:enabled="true" android:name=".MyService" />
     </application>
 
 </manifest>
